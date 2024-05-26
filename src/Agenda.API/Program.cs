@@ -1,3 +1,6 @@
+using Agenda.Infra;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +10,20 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddDbContext<ClienteContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    
+builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ClienteContext>();
+    var inicializadorDb = new InicializadorDbContext(context);
+    inicializadorDb.Iniciar();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
