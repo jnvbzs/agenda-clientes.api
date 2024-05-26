@@ -19,10 +19,10 @@ public class ClienteController : ControllerBase
         return Ok();
     }
 
-    [HttpPut]
-    public async Task<IActionResult> Atualizar([FromBody] AtualizarClienteDto atualizarClienteDto)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Atualizar([FromRoute] Guid id, [FromBody] AtualizarClienteDto atualizarClienteDto)
     {
-        await _servicoCliente.Atualizar(atualizarClienteDto);
+        await _servicoCliente.Atualizar(id, atualizarClienteDto);
         return Ok();
     }
 

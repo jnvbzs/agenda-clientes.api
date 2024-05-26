@@ -21,10 +21,15 @@ public class ServicoCliente
         await _repositorioCliente.Criar(cliente);
     }
 
-    public async Task Atualizar(AtualizarClienteDto atualizarClienteDto)
+    public async Task Atualizar(Guid id, AtualizarClienteDto atualizarClienteDto)
     {
-        var cliente = _mapper.Map<Cliente>(atualizarClienteDto);
-        await _repositorioCliente.Atualizar(cliente);
+        var cliente = await _repositorioCliente.ObterPorId(id);
+
+        if (cliente != null)
+        {
+            _mapper.Map(atualizarClienteDto, cliente);
+            await _repositorioCliente.Atualizar(cliente);
+        }
     }
 
     public async Task<ClienteDto> ObterPorId(Guid id)
@@ -41,6 +46,11 @@ public class ServicoCliente
 
     public async Task Remover(Guid id)
     {
-        await _repositorioCliente.Remover(id);
+        var cliente = await _repositorioCliente.ObterPorId(id);
+
+        if (cliente != null)
+        {
+            await _repositorioCliente.Remover(id);
+        }
     }
 }
