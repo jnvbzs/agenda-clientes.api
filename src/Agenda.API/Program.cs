@@ -1,3 +1,4 @@
+using Agenda.Aplicacao;
 using Agenda.Infra;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,8 @@ builder.Services.AddDbContext<ClienteContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
     
 builder.Services.AddScoped<IRepositorioCliente, RepositorioCliente>();
+
+builder.Services.AddScoped<ServicoCliente>();
 
 var app = builder.Build();
 
