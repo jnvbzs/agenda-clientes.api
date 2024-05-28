@@ -8,5 +8,5 @@ public class ClienteDto
     public DateTime DataNascimento { get; set; }
     public List<TelefoneDto> Telefones { get; set; }
     public List<DocumentoIdentificacaoDto> Documentos { get; set; }
-    public EnderecoDTO Endereco { get; set; }
+    public EnderecoDto Endereco { get; set; }
 }

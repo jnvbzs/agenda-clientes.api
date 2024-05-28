@@ -12,6 +12,6 @@ public class PerfilCliente : Profile
         CreateMap<AtualizarClienteDto, Cliente>().ForMember(dest => dest.Id, opt => opt.Ignore());
         CreateMap<TelefoneDto, Telefone>().ReverseMap();
         CreateMap<DocumentoIdentificacaoDto, DocumentoIdentificacao>().ReverseMap();
-        CreateMap<EnderecoDTO, Endereco>().ReverseMap();
+        CreateMap<EnderecoDto, Endereco>().ReverseMap();
     }
 }

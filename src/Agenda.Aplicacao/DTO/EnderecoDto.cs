@@ -1,6 +1,6 @@
 ﻿namespace Agenda.Aplicacao;
 
-public class EnderecoDTO
+public class EnderecoDto
 {   
     public string Logradouro { get; set; }
     public string Numero { get; set; }
