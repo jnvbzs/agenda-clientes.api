@@ -1,0 +1,21 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
+
+version: '3.4'
+
+services:
+  agenda.api:
+    image: agenda.api
+    container_name: agenda.api
+    build:
+      context: .
+      dockerfile: src/Agenda.API/Dockerfile
+    ports:
+      - 5259:5259
+  agenda.db: 
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: agenda.db
+    ports:
+      - "1433:1433" 
+    environment:
+      - ACCEPT_EULA=y
+      - SA_PASSWORD=sqlexpress123
